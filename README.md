@@ -1,6 +1,6 @@
 # Project Name
 
-> Perch - Cost of Home Ownership Backend
+> Perch - Cost of Home Ownership
 
 ## Related Projects
 
@@ -33,7 +33,7 @@
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
 
-#### Mongo
+### Mongo
 
 1. Create
   - /api/costHomeOwnership/property
