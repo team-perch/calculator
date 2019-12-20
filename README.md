@@ -21,14 +21,14 @@
   - /api/costHomeOwnership/zipcode
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Read
+2. Read
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Update
+3. Update
   - /api/costHomeOwnership/zipcode
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Delete
+4. Delete
   - /api/costHomeOwnership/zipcode
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
@@ -38,13 +38,13 @@
 1. Create
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Read
+2. Read
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Update
+3. Update
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
-1. Delete
+4. Delete
   - /api/costHomeOwnership/property
   - /api/costHomeOwnership/rate
 
