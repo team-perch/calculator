@@ -15,25 +15,25 @@ const createDbConn = async (scopeAuth) => {
     host,
   } = scopeAuth[env];
 
-  const conn = await new Client({
-    user,
-    password,
-    host,
-    port,
-    database: 'postgres',
-  });
+  // const conn = await new Client({
+  //   user,
+  //   password,
+  //   host,
+  //   port,
+  //   database: 'postgres',
+  // });
 
   const database = `perch_${env}`;
-  const dropDb = `
-    DROP DATABASE IF EXISTS ${database};
-  `;
-  const createDb = `
-    CREATE DATABASE ${database};
-  `;
-  await conn.connect();
-  await conn.query(dropDb);
-  await conn.query(createDb);
-  await conn.end();
+  // const dropDb = `
+  //   DROP DATABASE IF EXISTS ${database};
+  // `;
+  // const createDb = `
+  //   CREATE DATABASE ${database};
+  // `;
+  // await conn.connect();
+  // await conn.query(dropDb);
+  // await conn.query(createDb);
+  // await conn.end();
 
   let pool;
   try {

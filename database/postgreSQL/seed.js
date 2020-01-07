@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 const faker = require('faker/locale/en_US');
 const csvWriter = require('csv-write-stream');
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
 const writer = csvWriter();
 const { dbConn, createDbTables, cleanDbTables } = require('./index');
@@ -77,7 +78,7 @@ const seedRates = (conn, zips) => {
   const terms = [3, 5, 7, 10, 10, 15, 15, 20, 30, 30, 30, 30];
   const types = ['ARM', 'Fixed', 'Fixed'];
 
-  const loanCount = 10;
+  const loanCount = 1000;
   let query = '';
   for (let i = 0; i < loanCount; i += 1) {
     const zip = zips[faker.random.number(zips.length - 1)];
@@ -121,12 +122,35 @@ const seedRates = (conn, zips) => {
   return conn.query(query);
 };
 
-const csvSeeder = async (csvPath, conn) => {
-  conn.query(`COPY properties(zip_code, redfin_cost_estimate, insurance_rate, hoa_monthly_dues, construction_year, square_feet) FROM '${csvPath}' DELIMITER ',' CSV HEADER;`)
-    .then(() => {
-      console.log('I read the file!');
-    });
-};
+// const csvSeeder = async (csvPath, conn) => {
+//   conn.query(`COPY properties(zip_code, redfin_cost_estimate, insurance_rate, hoa_monthly_dues, construction_year, square_feet) FROM '${csvPath}' DELIMITER ',' CSV HEADER;`)
+//     .then(() => {
+//       console.log('I read the file!');
+//     });
+// };
+
+/*
+Put into postgres shell to copy from csv file
+
+
+\COPY properties(zip_code, redfin_cost_estimate, insurance_rate, hoa_monthly_dues, construction_year, square_feet) FROM 'database/postgreSQL/data.csv' DELIMITER ',' CSV HEADER;
+
+*/
+
+/*
+SAMPLE QUERY
+
+SELECT * FROM rates AS r JOIN lenders AS l
+    ON r.lender_id = l.lender_id
+    WHERE r.cost_low <= 2080000
+    AND r.cost_high >= 2080000
+    AND r.zip_code = 39470
+    AND r.term = 30
+    AND r.loan_type = 'Fixed'
+    AND r.down_payment_min <= 20
+    AND r.credit_min <= 740
+    AND r.origination_year = 2019;
+*/
 
 const seedDb = async (conn) => {
   const db = await conn;
@@ -158,9 +182,10 @@ const seedDb = async (conn) => {
 
   await seedProperties(db, sharedZips)
     .then(() => {
-      // for (let i = 0; i <= 10; i += 1) {
-      csvSeeder(path.resolve('database/postgreSQL/data.csv'), db);
-      // }
+      // // for (let i = 0; i <= 10; i += 1) {
+      // csvSeeder(path.resolve('database/postgreSQL/data.csv'), db);
+      // // }
+      console.log('done!');
     });
 };
 
