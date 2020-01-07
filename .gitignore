@@ -27,3 +27,9 @@ public/bundle.js
 # Authentication info
 */s3credentials.*
 *.pem
+
+# New Relic
+newrelic.js
+
+# CSV Data
+database/postgreSQL/data.csv
