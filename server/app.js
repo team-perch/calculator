@@ -21,8 +21,8 @@ app.get('/api/costHomeOwnership/properties', async (req, res) => {
   }
 
   try {
-    const [properties] = await controller.getPropertyData(id);
-    res.json(keysToCamel(properties));
+    const properties = await controller.getPropertyData(id);
+    res.json(keysToCamel(properties.rows));
   } catch (err) {
     res.status(500).end('server could not retrieve property data');
   }
@@ -44,11 +44,14 @@ app.get('/api/costHomeOwnership/rates', async (req, res) => {
   } = queries;
 
   try {
-    const [rates] = await controller.getRates(
+    console.log('1');
+    const rates = await controller.getRates(
       cost, zipCode, term, type, downPay, credit, origYear,
     );
-    res.json(keysToCamel(rates));
+    console.log('4: ', rates.rows);
+    res.json(keysToCamel(rates.rows));
   } catch (err) {
+    console.error(err.stack);
     res.status(500).end('server could not retrieve rates data');
   }
 });

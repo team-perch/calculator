@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('newrelic');
 const controller = require('./controller');
 const app = require('./app');
 
