@@ -1,30 +1,21 @@
 config:
-  target: "https://localhost:5432"
+  target: 'http://localhost:3001'
   phases:
     - duration: 60
-      arrivalRate: 5
-    - duration: 120
-      arrivalRate: 5
-      rampTo: 50
-    - duration: 600
       arrivalRate: 50
-  payload:
-    path: "keywords.csv"
-    fields:
-      - "keywords"
+      rampTo: 1000
+      name: "ramp to peak"
+    - duration: 180
+      arrivalRate: 260
+      name: "peak load"
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
 scenarios:
-  - name: "Search and buy"
+  - name: "Get Property ID"
+    weight: 1
     flow:
-      - post:
-          url: "/search"
-          body: "kw={{ keywords }}"
-          capture:
-            json: "$.results[0].id"
-            as: "id"
-      - get:
-          url: "/details/{{ id }}"
-      - think: 3
-      - post:
-          url: "/cart"
-          json:
-            productId: "{{ id }}"
+    - get:
+        url: "/?id={{$randomNumber(1,10000000)}}"
+    - get:
+        url: "/api/costHomeOwnership/rates?cost={{$randomNumber(1,10000000)}}&zipCode=24629&term=30&type=Fixed&downPay=20&credit=740&origYear=2019"
