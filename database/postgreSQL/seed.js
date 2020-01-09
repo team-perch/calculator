@@ -131,20 +131,16 @@ const seedRates = (conn, zips) => {
 
 /*
 Put into postgres shell to copy from csv file
-
-
 \COPY properties(zip_code, redfin_cost_estimate, insurance_rate, hoa_monthly_dues, construction_year, square_feet) FROM 'database/postgreSQL/data.csv' DELIMITER ',' CSV HEADER;
-
 */
 
 /*
 SAMPLE QUERY
-
 SELECT * FROM rates AS r JOIN lenders AS l
     ON r.lender_id = l.lender_id
     WHERE r.cost_low <= 2080000
     AND r.cost_high >= 2080000
-    AND r.zip_code = 39470
+    AND r.zip_code = 29783
     AND r.term = 30
     AND r.loan_type = 'Fixed'
     AND r.down_payment_min <= 20
